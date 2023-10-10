@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        indie: ["Indie Flower", "cursive"],
+        marker: ["Permanent Marker", "sans-serif"],
       },
       colors: {
         primary: "#e63a16",

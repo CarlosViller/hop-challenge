@@ -8,6 +8,11 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: "Permanent Marker";
+  src: url("../public/fonts/marker.ttf");
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }
