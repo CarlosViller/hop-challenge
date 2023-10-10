@@ -2,7 +2,14 @@
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        indie: ["Indie Flower", "cursive"],
+      },
+      colors: {
+        primary: "#e63a16",
+      },
+    },
   },
   plugins: [],
 };
