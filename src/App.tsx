@@ -22,7 +22,25 @@ const initialData: KanbanBoardData = {
 function App() {
   const [data, setData] = useState<KanbanBoardData>(initialData);
   const handleDragEnd = (result: DropResult) => {
-    
+    const { destination, source } = result;
+
+    if (!destination || source.index === destination.index) return;
+
+    const newIds = Array.from(data.columns[source.droppableId].taskIds);
+
+    const [item] = newIds.splice(source.index, 1);
+    newIds.splice(destination.index, 0, item);
+
+    setData((prevState) => ({
+      ...prevState,
+      columns: {
+        ...prevState.columns,
+        [source.droppableId]: {
+          ...prevState.columns[source.droppableId],
+          taskIds: newIds,
+        },
+      },
+    }));
   };
 
   return (
