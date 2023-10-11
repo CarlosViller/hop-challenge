@@ -3,6 +3,7 @@ import App from "../App";
 import { KanbanProvider } from "../context/KanbanContext";
 import { describe, expect, test } from "vitest/dist/index.js";
 import userEvent from "@testing-library/user-event";
+import { initialData } from "../constants";
 
 describe("Kanban board", () => {
   test("Render App", () => {
@@ -33,7 +34,26 @@ describe("Kanban board", () => {
 
     expect(screen.getByText("Esta es mi nueva tarea")).toBeInTheDocument();
   });
-  test.todo("Eliminar tarjeta");
+  test("Eliminar tarjeta", async () => {
+    render(
+      <KanbanProvider>
+        <App />
+      </KanbanProvider>
+    );
+
+    // Get first task
+    const task = initialData.tasks[Object.keys(initialData.tasks)[0]];
+
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: `Open options for "${task.content}" task`,
+      })
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Delete" }));
+
+    expect(screen.queryByText(task.content)).not.toBeInTheDocument();
+  });
   test.todo("Mover tarjeta usando boton");
   test.todo("Mover tarjeta usando Drag & Drop");
   test.todo("Mover tarjeta usando Drag & Drop y boton");

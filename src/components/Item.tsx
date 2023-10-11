@@ -42,7 +42,11 @@ export default function Item({ task, index, columnId }: Props) {
             }}
           />
           <button className="w-fit ml-auto block p-1" onClick={handleClick}>
-            <img width={16} src={optionsIcon} alt="Open options" />
+            <img
+              width={16}
+              src={optionsIcon}
+              alt={`Open options for "${task.content}" task`}
+            />
           </button>
           <p>{task.content}</p>
         </li>
