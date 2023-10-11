@@ -23,6 +23,7 @@ export default function Column({ column, index }: Props) {
       <Droppable droppableId={id}>
         {(provided) => (
           <ul
+            aria-label={`${column.title} column`}
             className="grow"
             ref={provided.innerRef}
             {...provided.droppableProps}

@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import App from "../App";
 import { KanbanProvider } from "../context/KanbanContext";
 import { describe, expect, test } from "vitest/dist/index.js";
@@ -54,7 +54,29 @@ describe("Kanban board", () => {
 
     expect(screen.queryByText(task.content)).not.toBeInTheDocument();
   });
-  test.todo("Mover tarjeta usando boton");
-  test.todo("Mover tarjeta usando Drag & Drop");
-  test.todo("Mover tarjeta usando Drag & Drop y boton");
+  test("Mover tarjeta usando boton", async () => {
+    render(
+      <KanbanProvider>
+        <App />
+      </KanbanProvider>
+    );
+
+    // Get first task
+    const task = initialData.tasks[Object.keys(initialData.tasks)[0]];
+
+    await userEvent.click(
+      screen.getByRole("button", {
+        name: `Open options for "${task.content}" task`,
+      })
+    );
+
+    await userEvent.click(screen.getByRole("button", { name: "Move" }));
+    await userEvent.click(screen.getByRole("button", { name: "En progreso" }));
+
+    const targetColumn = screen.getByRole("list", {
+      name: "En progreso column",
+    });
+
+    expect(within(targetColumn).getByText(task.content)).toBeInTheDocument();
+  });
 });
