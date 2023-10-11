@@ -7,7 +7,10 @@ import { KanbanBoardData } from "./types";
 const initialData: KanbanBoardData = {
   tasks: {
     "task-1": { id: "task-1", content: "Llamada de equipo" },
-    "task-2": { id: "task-2", content: "Implementar sistema de seguimiento de paquetes" },
+    "task-2": {
+      id: "task-2",
+      content: "Implementar sistema de seguimiento de paquetes",
+    },
     "task-3": { id: "task-3", content: "Realizar monitoreo del logs" },
   },
   columns: {
@@ -89,6 +92,28 @@ function App() {
                 key={columnId}
                 column={data.columns[columnId]}
                 tasks={data.tasks}
+                addTask={(content: string) => {
+                  setData((prevState) => {
+                    const newTaskId = "task" + prevState.tasks.length;
+                    return {
+                      ...prevState,
+                      tasks: {
+                        ...prevState.tasks,
+                        [newTaskId]: { id: newTaskId, content },
+                      },
+                      columns: {
+                        ...prevState.columns,
+                        [columnId]: {
+                          ...prevState.columns[columnId],
+                          taskIds: [
+                            ...prevState.columns[columnId].taskIds,
+                            newTaskId,
+                          ],
+                        },
+                      },
+                    };
+                  });
+                }}
               />
             ))}
           </section>

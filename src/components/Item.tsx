@@ -11,7 +11,7 @@ export default function Item({ task, index }: Props) {
     <Draggable index={index} draggableId={task.id}>
       {(provided) => (
         <p
-          className="border-[1px] p-2 rounded-lg border-gray-200 my-2"
+          className="item bg-white"
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
