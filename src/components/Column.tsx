@@ -17,7 +17,7 @@ export default function Column({ column, index }: Props) {
 
   return (
     <section className="bg-gray-100 flex flex-col h-fit min-h-[125px] rounded-lg py-2 px-4">
-      <h2 className="text-3xl font-marker font-bold mb-3 text-background">
+      <h2 className="text-3xl font-marker font-bold mb-3 text-secondary">
         {title}
       </h2>
       <Droppable droppableId={id}>
