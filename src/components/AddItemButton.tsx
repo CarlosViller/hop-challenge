@@ -1,16 +1,25 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import checkIcon from "../assets/check.svg";
 import cancelIcon from "../assets/cancel.svg";
+import { Column } from "../types";
+import { KanbanContext } from "../context/KanbanContext";
 
 type Props = {
-  addTask: (content: string) => void;
+  columnId: Column["id"];
 };
 
-export default function AddItemButton({ addTask }: Props) {
+export default function AddItemButton({ columnId }: Props) {
   const [content, setContent] = useState("");
   const [active, setActive] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const { addTask } = useContext(KanbanContext);
+
+  function handleClose() {
+    setActive(false);
+    setContent("");
+  }
 
   return active ? (
     <section className="flex flex-col gap-1">
@@ -25,17 +34,14 @@ export default function AddItemButton({ addTask }: Props) {
       <section className="flex items-center gap-2 justify-center">
         <button
           className="round-btn"
-          onClick={() => addTask(content)}
+          onClick={() => {
+            addTask(content, columnId);
+            handleClose();
+          }}
         >
           <img width={32} src={checkIcon} alt="confirm" />
         </button>
-        <button
-          className="round-btn"
-          onClick={() => {
-            setActive(false);
-            setContent("");
-          }}
-        >
+        <button className="round-btn" onClick={handleClose}>
           <img width={32} src={cancelIcon} alt="cancel" />
         </button>
       </section>

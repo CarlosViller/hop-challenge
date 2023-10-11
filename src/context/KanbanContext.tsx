@@ -96,7 +96,9 @@ export function KanbanProvider({ children }: { children: React.ReactNode }) {
    */
   function addTask(content: string, targetColumnId: string) {
     setData((prevState) => {
-      const newTaskId = "task" + prevState.tasks.length;
+      const newTaskId = `task-${
+        prevState.columns[targetColumnId].taskIds.length + 1
+      }`;
       return {
         ...prevState,
         tasks: {
