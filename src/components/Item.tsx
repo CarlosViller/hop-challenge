@@ -13,7 +13,7 @@ type Props = {
 
 export default function Item({ task, index, columnId }: Props) {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const { moveTask } = useContext(KanbanContext);
+  const { moveTask, deleteTask } = useContext(KanbanContext);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,9 +33,10 @@ export default function Item({ task, index, columnId }: Props) {
           ref={provided.innerRef}
         >
           <ItemOptions
-            handleClose={handleClose}
             anchorEl={anchorEl}
             currentColumnId={columnId}
+            handleClose={handleClose}
+            handleDelete={() => deleteTask(columnId, index)}
             handleMove={(targetColumnId: string, targetIndex: number) => {
               moveTask(columnId, targetColumnId, index, targetIndex);
             }}

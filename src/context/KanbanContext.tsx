@@ -39,6 +39,7 @@ type KanbanContextT = {
     targetColumnIndex: number
   ) => void;
   addTask: (content: string, targetColumnId: string) => void;
+  deleteTask: (sourceColumnId: string, sourceColumnIndex: number) => void;
 };
 
 export const KanbanContext = createContext<KanbanContextT>(
@@ -116,8 +117,34 @@ export function KanbanProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
+  /**
+   * Remove a task from a target column.
+   * @param sourceColumnId
+   * @param sourceColumnIndex
+   */
+  function deleteTask(sourceColumnId: string, sourceColumnIndex: number) {
+    setData((prevState) => {
+      const newColumnTasks = prevState.columns[sourceColumnId].taskIds.filter(
+        (_, index) => index !== sourceColumnIndex
+      );
+
+      return {
+        ...prevState,
+        columns: {
+          ...prevState.columns,
+          [sourceColumnId]: {
+            ...prevState.columns[sourceColumnId],
+            taskIds: newColumnTasks,
+          },
+        },
+      };
+    });
+  }
+
   return (
-    <KanbanContext.Provider value={{ addTask, moveTask, data }}>
+    <KanbanContext.Provider
+      value={{ addTask, moveTask, data, deleteTask }}
+    >
       {children}
     </KanbanContext.Provider>
   );

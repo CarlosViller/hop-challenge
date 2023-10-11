@@ -9,6 +9,7 @@ type Props = {
   anchorEl: HTMLButtonElement | null;
   handleClose: () => void;
   handleMove: (targetColumnId: string, targetIndex: number) => void;
+  handleDelete: () => void;
   currentColumnId: Column["id"];
 };
 
@@ -16,6 +17,7 @@ export default function ItemOptions({
   anchorEl,
   handleClose,
   handleMove,
+  handleDelete,
   currentColumnId,
 }: Props) {
   const [move, setMove] = useState(false);
@@ -41,7 +43,7 @@ export default function ItemOptions({
           <button onClick={() => setMove(true)}>
             <img width={32} src={rightArrowIcon} alt="Move" />
           </button>
-          <button onClick={handleClose}>
+          <button onClick={handleDelete}>
             <img width={32} src={cancelBlueIcon} alt="Delete" />
           </button>
         </section>
