@@ -20,9 +20,10 @@ export default function ItemOptions({
   handleDelete,
   currentColumnId,
 }: Props) {
+  const { data } = useContext(KanbanContext);
   const [move, setMove] = useState(false);
 
-  const { data } = useContext(KanbanContext);
+  const { columns, columnsOrder } = data;
 
   return (
     <Popover
@@ -49,7 +50,7 @@ export default function ItemOptions({
         </section>
       ) : (
         <ul className="flex flex-col gap-2 px-2 py-1">
-          {data.columnsOrder.map((targetColumnId) => {
+          {columnsOrder.map((targetColumnId) => {
             if (targetColumnId === currentColumnId) return null;
             return (
               <li key={targetColumnId}>
@@ -58,11 +59,11 @@ export default function ItemOptions({
                   onClick={() =>
                     handleMove(
                       targetColumnId,
-                      data.columns[targetColumnId].taskIds.length // Move the element to the last position in the target column.
+                      columns[targetColumnId].taskIds.length // Move the element to the last position in the target column.
                     )
                   }
                 >
-                  {data.columns[targetColumnId].title}
+                  {columns[targetColumnId].title}
                 </button>
               </li>
             );

@@ -7,27 +7,29 @@ import { KanbanContext } from "../context/KanbanContext";
 
 type Props = {
   column: ColumnT;
-  index: number
+  index: number;
 };
 
 export default function Column({ column, index }: Props) {
   const { data } = useContext(KanbanContext);
 
+  const { title, taskIds, id } = column;
+
   return (
     <section className="bg-gray-100 flex flex-col h-fit min-h-[125px] rounded-lg py-2 px-4">
       <h2 className="text-3xl font-marker font-bold mb-3 text-background">
-        {column.title}
+        {title}
       </h2>
-      <Droppable droppableId={column.id}>
+      <Droppable droppableId={id}>
         {(provided) => (
           <ul
             className="grow"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            {column.taskIds.map((taskId, index) => (
+            {taskIds.map((taskId, index) => (
               <Item
-                columnId={column.id}
+                columnId={id}
                 task={data.tasks[taskId]}
                 index={index}
                 key={taskId}
@@ -37,7 +39,7 @@ export default function Column({ column, index }: Props) {
           </ul>
         )}
       </Droppable>
-      {index === 0 && <AddItemButton columnId={column.id} />}
+      {index === 0 && <AddItemButton columnId={id} />}
     </section>
   );
 }
