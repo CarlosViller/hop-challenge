@@ -15,4 +15,22 @@
 
 body {
   font-family: "Roboto", sans-serif;
+  @apply bg-background
+}
+
+.auto-height-form {
+  height: fit-content;
+  resize: none;
+}
+
+.item {
+  @apply p-2 rounded-lg my-2;
+}
+
+.primary-btn {
+  @apply rounded-lg border-2 border-secondary px-2 py-1 hover:bg-secondary hover:text-white transition-all;
+}
+
+.round-btn {
+  @apply bg-secondary rounded-full p-1 hover:scale-110 transition-transform
 }
