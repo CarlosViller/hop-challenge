@@ -97,9 +97,7 @@ export function KanbanProvider({ children }: { children: React.ReactNode }) {
    */
   function addTask(content: string, targetColumnId: string) {
     setData((prevState) => {
-      const newTaskId = `task-${
-        prevState.columns[targetColumnId].taskIds.length + 1
-      }`;
+      const newTaskId = `task-${Object.keys(prevState.tasks).length + 1}`;
       return {
         ...prevState,
         tasks: {
@@ -142,9 +140,7 @@ export function KanbanProvider({ children }: { children: React.ReactNode }) {
   }
 
   return (
-    <KanbanContext.Provider
-      value={{ addTask, moveTask, data, deleteTask }}
-    >
+    <KanbanContext.Provider value={{ addTask, moveTask, data, deleteTask }}>
       {children}
     </KanbanContext.Provider>
   );
