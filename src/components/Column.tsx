@@ -16,7 +16,7 @@ export default function Column({ column, index }: Props) {
   const { title, taskIds, id } = column;
 
   return (
-    <section className="bg-gray-100 flex flex-col h-fit min-h-[125px] rounded-lg py-2 px-4">
+    <section className="bg-gray-100 flex flex-col h-fit min-h-[125px] rounded-lg py-2 px-4 max-h-[80vh] overflow-x-hidden overflow-y-scroll">
       <h2 className="text-3xl font-marker font-bold mb-3 text-secondary">
         {title}
       </h2>

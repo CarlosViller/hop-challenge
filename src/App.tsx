@@ -36,7 +36,7 @@ function App() {
       <Header />
       <main className="max-w-screen-xl mx-auto my-10">
         <DragDropContext onDragEnd={handleDragEnd}>
-          <section className="grid grid-cols-3 gap-5 place-content-start">
+          <section className="grid lg:grid-cols-3 grid-cols-1 gap-5 px-4 place-content-start">
             {data.columnsOrder.map((columnId, index) => (
               <Column key={columnId} index={index} column={data.columns[columnId]} />
             ))}
