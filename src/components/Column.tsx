@@ -29,7 +29,7 @@ export default function Column({ column, tasks, addTask }: Props) {
           </div>
         )}
       </Droppable>
-      <AddItemButton addTask={addTask} />
+      {column.id === "column-1" && <AddItemButton addTask={addTask} />}
     </section>
   );
 }
