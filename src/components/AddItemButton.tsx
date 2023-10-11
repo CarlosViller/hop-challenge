@@ -33,16 +33,17 @@ export default function AddItemButton({ columnId }: Props) {
       ></TextareaAutosize>
       <section className="flex items-center gap-2 justify-center">
         <button
-          className="round-btn"
+          className="round-btn disabled:opacity-50"
+          disabled={content === ""}
           onClick={() => {
             addTask(content, columnId);
             handleClose();
           }}
         >
-          <img width={32} src={checkIcon} alt="confirm" />
+          <img width={32} src={checkIcon} alt="Confirm task creation" />
         </button>
         <button className="round-btn" onClick={handleClose}>
-          <img width={32} src={cancelIcon} alt="cancel" />
+          <img width={32} src={cancelIcon} alt="Cancel task creation" />
         </button>
       </section>
     </section>

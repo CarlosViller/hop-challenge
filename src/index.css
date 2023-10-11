@@ -10,12 +10,12 @@
 
 @font-face {
   font-family: "Permanent Marker";
-  src: url("../public/fonts/marker.ttf");
+  src: url("../fonts/marker.ttf");
 }
 
 body {
   font-family: "Roboto", sans-serif;
-  @apply bg-background
+  @apply bg-background;
 }
 
 .auto-height-form {
@@ -32,5 +32,9 @@ body {
 }
 
 .round-btn {
-  @apply bg-secondary rounded-full p-1 hover:scale-110 transition-transform
+  @apply bg-secondary rounded-full p-1 transition-transform;
+}
+
+.round-btn:not(:disabled) {
+  @apply hover:scale-110;
 }
