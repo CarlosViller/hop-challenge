@@ -7,9 +7,10 @@ import { KanbanContext } from "../context/KanbanContext";
 
 type Props = {
   column: ColumnT;
+  index: number
 };
 
-export default function Column({ column }: Props) {
+export default function Column({ column, index }: Props) {
   const { data } = useContext(KanbanContext);
 
   return (
@@ -36,7 +37,7 @@ export default function Column({ column }: Props) {
           </ul>
         )}
       </Droppable>
-      {column.id === "column-1" && <AddItemButton columnId={column.id} />}
+      {index === 0 && <AddItemButton columnId={column.id} />}
     </section>
   );
 }
